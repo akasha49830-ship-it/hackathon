@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Campus Mind AI — Your College, All in One Place</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0B0A10;--ink2:#17141F;--gold:#D8B56A;--gold2:#F1DDA8;--sap:#7C93FF;--jade:#5FB8A5;--rose:#D69BB5;--tx:#FFF9EE;--mu:#D9D2E0;--glass:rgba(14,12,20,.88);--line:rgba(216,181,106,.3);--field:rgba(243,239,231,.07);--on:#1A1407;--scrim:linear-gradient(90deg,rgba(8,7,12,.8),rgba(8,7,12,.42) 52%,rgba(8,7,12,0) 82%);--sc2:rgba(8,7,12,.62);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--ink:#F4F0EA;--ink2:#E8E2D8;--gold:#8A6A22;--gold2:#B8913A;--sap:#3550C8;--jade:#237A68;--rose:#A34D75;--tx:#17121F;--mu:#4B4458;--glass:rgba(255,255,255,.93);--line:rgba(138,106,34,.38);--field:rgba(14,21,48,.06);--on:#fff;--scrim:linear-gradient(90deg,rgba(255,255,255,.82),rgba(255,255,255,.45) 52%,rgba(255,255,255,0) 82%);--sc2:rgba(255,255,255,.7)}}
+:root[data-theme="light"]{--ink:#F4F0EA;--ink2:#E8E2D8;--gold:#8A6A22;--gold2:#B8913A;--sap:#3550C8;--jade:#237A68;--rose:#A34D75;--tx:#17121F;--mu:#4B4458;--glass:rgba(255,255,255,.93);--line:rgba(138,106,34,.38);--field:rgba(14,21,48,.06);--on:#fff;--scrim:linear-gradient(90deg,rgba(255,255,255,.82),rgba(255,255,255,.45) 52%,rgba(255,255,255,0) 82%);--sc2:rgba(255,255,255,.7)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--ink);color:var(--tx);font:17px/1.6 Manrope,system-ui,"Segoe UI",Arial,sans-serif}
+h1,h2,h3{font-family:Fraunces,Georgia,"Times New Roman",serif;font-weight:600;line-height:1.08;margin:0}
+#gl{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+main{position:relative;z-index:2;pointer-events:none}
+#scrim{position:fixed;inset:0;z-index:1;pointer-events:none;background:var(--scrim)}
+@media(max-width:820px){#scrim{background:linear-gradient(var(--sc2),var(--sc2))}}
+.sec{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:96px 6vw;max-width:1180px;margin:0 auto}
+.card,.btn,nav,input,select,button,a,.dots{pointer-events:auto}
+.card{background:var(--glass);border:1px solid var(--line);border-radius:22px;padding:24px;backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);box-shadow:0 24px 60px rgba(2,6,20,.35)}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:5;display:flex;align-items:center;gap:8px;padding:14px 5vw}
+.logo{font:600 20px Fraunces,Georgia,serif;margin-right:auto;display:flex;align-items:center;gap:10px}
+.logo i{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--gold);background:radial-gradient(circle at 35% 30%,var(--gold2),var(--gold) 45%,transparent 46%)}
+.btn{font:700 14px Manrope,sans-serif;color:var(--tx);background:transparent;border:1px solid var(--line);border-radius:999px;padding:10px 20px;cursor:pointer;transition:transform .2s,border-color .2s,background .2s}
+.btn:hover{transform:translateY(-2px);border-color:var(--gold);background:var(--field)}
+.btn.pri{background:linear-gradient(135deg,var(--gold2),var(--gold));border-color:transparent;color:var(--on)}
+:focus-visible{outline:3px solid var(--sap);outline-offset:3px}
+.hero h1{font-size:clamp(46px,8.4vw,98px);letter-spacing:-.025em;max-width:10ch}
+.hero p{font-size:clamp(18px,2.2vw,22px);max-width:36ch;color:var(--tx);opacity:.92;margin:20px 0 30px}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+h2{font-size:clamp(32px,5vw,56px);letter-spacing:-.02em;max-width:15ch;margin-bottom:14px}
+.lead{color:var(--mu);max-width:52ch;margin:0 0 28px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.tilt{transform-style:preserve-3d;transition:transform .15s ease-out;will-change:transform}
+.tilt h3{font-size:21px;margin:14px 0 8px}.tilt p{margin:0;color:var(--mu);font-size:15.5px}
+.ic{width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:600 20px Fraunces,serif;border:1.5px solid currentColor;background:var(--field)}
+.pain{display:flex;gap:14px;align-items:center;margin:0 0 14px;max-width:560px}
+.pain b{flex:none;width:9px;height:9px;transform:rotate(45deg);background:var(--gold)}
+.calc{display:grid;gap:22px;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:start}
+@media(max-width:820px){.calc{grid-template-columns:1fr}}
+.r{display:grid;gap:8px;grid-template-columns:1.5fr 1fr 1fr 36px;margin-bottom:8px}
+.r.two{grid-template-columns:1fr 1fr 36px}
+input,select{width:100%;font:inherit;color:var(--tx);background:var(--field);border:1px solid var(--line);border-radius:12px;padding:10px 11px;min-width:0}
+select option{color:#0E1530}
+.x{padding:0;border-radius:12px;background:var(--field);border:1px solid var(--line);color:var(--mu);cursor:pointer}
+.out{text-align:center}
+.ring{--v:0;width:168px;height:168px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;background:conic-gradient(var(--c,var(--gold)) calc(var(--v)*1%),var(--field) 0);transition:background .3s}
+.ring div{width:136px;height:136px;border-radius:50%;background:var(--ink2);display:grid;place-items:center;font:600 36px Fraunces,serif}
+.note{font-size:14px;color:var(--mu);margin:10px 0 0}
+.warn{color:var(--gold);font-weight:700}
+.badge{display:inline-block;font:700 12.5px Manrope;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:2px 10px;margin-left:8px;vertical-align:middle}
+.road{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));counter-reset:s}
+.road .card::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font:600 17px Fraunces,serif}
+.dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:5;display:flex;flex-direction:column;gap:12px}
+.dots button{width:10px;height:10px;padding:0;transform:rotate(45deg);border:1px solid var(--gold);background:transparent;cursor:pointer}
+.dots button.on{background:var(--gold)}
+@media(max-width:700px){nav .hide{display:none}.dots{display:none}.sec{padding-top:84px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.tilt,.btn{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<nav>
+  <span class="logo"><i></i>Campus Mind AI</span>
+  <button class="btn hide" data-go="modules">Features</button>
+  <button class="btn hide" data-go="cgpa">CGPA</button>
+  <button class="btn hide" data-go="attendance">Attendance</button>
+  <button class="btn" id="theme" aria-label="Toggle light or dark theme">Theme</button>
+</nav>
+<div id="scrim"></div>
+<div class="dots" id="dots" aria-label="Page sections"></div>
+
+<main>
+<section class="sec hero" id="hero" data-name="Start">
+  <h1>Your college, all in one place</h1>
+  <p>Faculty, fees, grades, attendance and study material, gathered on one smart campus platform.</p>
+  <div class="row"><button class="btn pri" data-go="modules">Explore features</button><button class="btn" data-go="cgpa">Try the calculators</button></div>
+  <p class="note" style="max-width:48ch;margin-top:26px">Scroll to travel around the campus. Drag or move your pointer to spin the scene, and click a floating object on the globe to jump to it.</p>
+</section>
+
+<section class="sec" id="problem" data-name="Problem">
+  <h2>Campus life, simplified</h2>
+  <p class="lead">Students deal with the same friction every semester.</p>
+  <div class="card" style="max-width:640px">
+    <p class="pain"><b></b>Campus information is scattered across different sources.</p>
+    <p class="pain"><b></b>Faculty details and contacts are hard to find.</p>
+    <p class="pain"><b></b>Fee structures can be confusing to navigate.</p>
+    <p class="pain"><b></b>CGPA and attendance need easier calculation.</p>
+    <p class="pain" style="margin:0"><b></b>Notes and assignments are hard to organize.</p>
+  </div>
+</section>
+
+<section class="sec" id="modules" data-name="Modules">
+  <h2>One campus. One intelligent hub.</h2>
+  <p class="lead">Five connected modules, shown here as the proposed design. Move your pointer over a card.</p>
+  <div class="grid">
+    <div class="card tilt"><div class="ic" style="color:var(--sap)">F</div><h3>Faculty directory</h3><p>Search by name or department, with profiles, subjects and official contacts.</p></div>
+    <div class="card tilt"><div class="ic" style="color:var(--gold)">₹</div><h3>Fee structure</h3><p>Semester-wise fees, tuition separate from extra charges, recurring vs one-time.</p></div>
+    <div class="card tilt" data-go="cgpa" style="cursor:pointer"><div class="ic" style="color:var(--jade)">G</div><h3>CGPA calculator</h3><p>Credit-weighted SGPA and CGPA. Working demo below.</p></div>
+    <div class="card tilt" data-go="attendance" style="cursor:pointer"><div class="ic" style="color:var(--rose)">A</div><h3>Attendance predictor</h3><p>Classes to attend or safely miss for your target. Working demo below.</p></div>
+    <div class="card tilt"><div class="ic" style="color:var(--tx)">N</div><h3>Notes and assignments</h3><p>Resources by semester and subject, with deadlines and authorized downloads.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="cgpa" data-name="CGPA">
+  <h2>Understand your academic performance</h2>
+  <p class="lead">Enter credits and grades. Results update as you type and nothing is saved or sent anywhere.</p>
+  <div class="calc">
+    <div class="card">
+      <h3 style="font-size:20px;margin-bottom:14px">SGPA for one semester</h3>
+      <div id="sg"></div>
+      <button class="btn" id="sgAdd">Add subject</button>
+      <h3 style="font-size:20px;margin:24px 0 14px">CGPA across semesters</h3>
+      <div id="cg"></div>
+      <button class="btn" id="cgAdd">Add semester</button>
+    </div>
+    <div class="card out">
+      <div class="ring" id="sgRing"><div id="sgVal">–</div></div><b>SGPA</b>
+      <p class="note" id="sgTxt">Enter credits and a grade for at least one subject.</p>
+      <div class="ring" id="cgRing" style="--c:var(--sap);margin-top:18px"><div id="cgVal">–</div></div><b>CGPA</b>
+      <p class="note" id="cgTxt">Enter SGPA and credits for at least one semester.</p>
+      <p class="note">Grade points use an example 10-point scale (O=10 … F=0). Results are estimates unless this matches your university’s official grading scheme.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="attendance" data-name="Attendance">
+  <h2>Stay ahead of your attendance</h2>
+  <p class="lead">Based only on the numbers you enter, not on official records.</p>
+  <div class="calc">
+    <div class="card">
+      <label>Classes attended<input id="aA" type="number" min="0" step="1" inputmode="numeric"></label>
+      <label style="display:block;margin-top:12px">Total classes conducted<input id="aT" type="number" min="0" step="1" inputmode="numeric"></label>
+      <label style="display:block;margin-top:12px">Target attendance (%)<input id="aG" type="number" min="0" max="100" value="75" inputmode="decimal"></label>
+      <p class="note">Check your college’s rules for the required percentage and any rounding or condonation.</p>
+    </div>
+    <div class="card out">
+      <div class="ring" id="aRing" style="--c:var(--jade)"><div id="aVal">–</div></div>
+      <p id="aTxt" style="margin:0">Enter classes attended and total classes.</p>
+      <p class="note" id="aNote"></p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="more" data-name="More">
+  <h2>Everything you need to learn better</h2>
+  <p class="lead">Learning resources and AI support are part of the roadmap, not live features yet.</p>
+  <div class="grid">
+    <div class="card tilt"><h3>Notes and assignments</h3><p>Organized by semester and subject, with instructions, deadlines and authorized download links.</p></div>
+    <div class="card tilt"><h3>Campus AI assistant<span class="badge">Planned</span></h3><p>Optional future assistant answering campus questions from retrieved college documents, with source references.</p></div>
+  </div>
+</section>
+
+<section class="sec" id="roadmap" data-name="Roadmap">
+  <h2>Building a smarter campus experience</h2>
+  <p class="lead">Four stages, from essentials to AI.</p>
+  <div class="road">
+    <div class="card tilt"><h3>Campus essentials</h3><p>Faculty and fee information.</p></div>
+    <div class="card tilt"><h3>Academic tools</h3><p>CGPA calculator and attendance predictor.</p></div>
+    <div class="card tilt"><h3>Learning resources</h3><p>Notes and assignments.</p></div>
+    <div class="card tilt"><h3>AI expansion</h3><p>Document-based Q&amp;A and personalized assistance.</p></div>
+  </div>
+</section>
+
+<section class="sec hero" id="end" data-name="End">
+  <h2 style="max-width:14ch">Campus Mind AI</h2>
+  <p>Your campus. One smart platform.</p>
+  <div class="row"><button class="btn pri" data-go="hero">Back to the start</button></div>
+</section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var $=function(s,r){return(r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function isLight(){var d=document.documentElement.dataset.theme;return d?d==='light':matchMedia('(prefers-color-scheme: light)').matches}
+
+/* navigation */
+function go(id){var e=document.getElementById(id);if(e)e.scrollIntoView({behavior:reduce?'auto':'smooth'})}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(t)go(t.getAttribute('data-go'))});
+var secs=$$('.sec'),dots=$('#dots');
+secs.forEach(function(s){var b=document.createElement('button');b.setAttribute('aria-label',s.dataset.name);b.onclick=function(){go(s.id)};dots.appendChild(b)});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var i=secs.indexOf(e.target);$$('button',dots).forEach(function(b,j){b.classList.toggle('on',i===j)})}})},{threshold:.5});
+secs.forEach(function(s){io.observe(s)});
+$('#theme').onclick=function(){document.documentElement.dataset.theme=isLight()?'dark':'light'};
+
+/* card tilt */
+$$('.tilt').forEach(function(c){
+  c.addEventListener('pointermove',function(e){if(reduce)return;var b=c.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;c.style.transform='perspective(700px) rotateY('+x*12+'deg) rotateX('+-y*12+'deg) translateZ(6px)'});
+  c.addEventListener('pointerleave',function(){c.style.transform=''});
+});
+
+/* calculators (credit-weighted; same logic as the tested calc library) */
+var SC={'O':10,'A+':9,'A':8,'B+':7,'B':6,'C':5,'P':4,'F':0};
+function mkRow(box,html,upd,keep){var d=document.createElement('div');d.className='r'+(keep?' two':'');d.innerHTML=html+'<button class="x" aria-label="Remove row">×</button>';
+  d.addEventListener('input',upd);$('.x',d).onclick=function(){if(box.children.length>1){d.remove();upd()}};box.appendChild(d)}
+function ring(id,val,max){$(id).style.setProperty('--v',Math.max(0,Math.min(100,val/max*100)))}
+var sg=$('#sg'),cg=$('#cg');
+function sgRow(){mkRow(sg,'<input placeholder="Subject" aria-label="Subject name"><input type="number" min="0" step="0.5" placeholder="Credits" aria-label="Credits"><select aria-label="Grade"><option value="">Grade</option>'+Object.keys(SC).map(function(g){return'<option>'+g+'</option>'}).join('')+'</select>',updSg)}
+function cgRow(){mkRow(cg,'<input type="number" min="0" max="10" step="0.01" placeholder="SGPA" aria-label="Semester SGPA"><input type="number" min="0" step="0.5" placeholder="Credits" aria-label="Semester credits">',updCg,true)}
+function updSg(){var c=0,w=0;$$('.r',sg).forEach(function(r){var i=$$('input,select',r),cr=parseFloat(i[1].value),g=i[2].value;if(cr>0&&g in SC){c+=cr;w+=cr*SC[g]}});
+  if(!c){$('#sgVal').textContent='–';ring('#sgRing',0,10);$('#sgTxt').textContent='Enter credits and a grade for at least one subject.';return}
+  var v=w/c;$('#sgVal').textContent=v.toFixed(2);ring('#sgRing',v,10);$('#sgTxt').textContent='Σ(credits × grade points) ÷ Σ credits = '+w+' ÷ '+c}
+function updCg(){var c=0,w=0;$$('.r',cg).forEach(function(r){var i=$$('input',r),s=parseFloat(i[0].value),cr=parseFloat(i[1].value);if(s>=0&&cr>0){c+=cr;w+=s*cr}});
+  if(!c){$('#cgVal').textContent='–';ring('#cgRing',0,10);$('#cgTxt').textContent='Enter SGPA and credits for at least one semester.';return}
+  var v=w/c;$('#cgVal').textContent=v.toFixed(2);ring('#cgRing',v,10);$('#cgTxt').textContent='Weighted by semester credits, not a plain average of SGPAs.'}
+sgRow();sgRow();sgRow();cgRow();cgRow();
+$('#sgAdd').onclick=sgRow;$('#cgAdd').onclick=cgRow;
+
+function updAtt(){var a=parseInt($('#aA').value,10),t=parseInt($('#aT').value,10),g=parseFloat($('#aG').value),T=g/100,o=$('#aTxt');$('#aNote').textContent='';
+  if(isNaN(a)||isNaN(t)){$('#aVal').textContent='–';ring('#aRing',0,100);o.textContent='Enter classes attended and total classes.';return}
+  if(t<=0||a<0||a>t||!(g>=0&&g<=100)){$('#aVal').textContent='–';ring('#aRing',0,100);o.innerHTML='<span class="warn">Check the numbers: total must be above 0, attended between 0 and total, target 0–100.</span>';return}
+  var p=a/t*100,ok=a*100>=g*t;$('#aVal').textContent=p.toFixed(1)+'%';ring('#aRing',p,100);
+  if(ok){var m=T===0?null:Math.max(0,Math.floor(a/T-t+1e-9));o.innerHTML='You meet the '+g+'% target. '+(m===null?'There is no minimum to protect.':m>0?'You can miss up to <b>'+m+'</b> more class'+(m>1?'es':'')+' if you attend all others.':'You cannot miss any more classes without dropping below target.')}
+  else{var n=T>=1?null:Math.ceil((T*t-a)/(1-T)-1e-9);o.innerHTML='<span class="warn">Below the '+g+'% target.</span> '+(n===null?'A 100% target cannot be reached once a class is missed.':'Attend the next <b>'+n+'</b> class'+(n>1?'es':'')+' in a row to reach it.')}
+  $('#aNote').textContent='Assumes every other upcoming class is attended. Confirm with your college’s attendance rules.'}
+['aA','aT','aG'].forEach(function(i){$('#'+i).addEventListener('input',updAtt)});
+
+/* 3D scene: a ring of college dioramas; scrolling circles the camera around them */
+var cv=$('#gl'),R;
+try{R=new THREE.WebGLRenderer({canvas:cv,antialias:true})}catch(e){cv.style.display='none';return}
+R.setPixelRatio(Math.min(devicePixelRatio,2));R.autoClear=false;
+var T3=THREE,N=8,STEP=Math.PI*2/N,RR=9.5,GOLD=0xD8B56A,IVORY=0xEDE6D6,BRICK=0xA24B3A;
+var PAL=[[0x14101A,0x5A2E2A],[0x12100F,0x3E3128],[0x0D1618,0x1F4A48],[0x0F1712,0x2D4A33],[0x17120D,0x5E4520],[0x130F16,0x4A2F47],[0x0F1315,0x34464F],[0x16110C,0x6B4A1E]].map(function(p){return[new T3.Color(p[0]),new T3.Color(p[1])]});
+var bgU={uT:{value:0},uL:{value:0},uA:{value:new T3.Color()},uB:{value:new T3.Color()},uM:{value:new T3.Vector2(.5,.5)},uR:{value:new T3.Vector2(1,1)}};
+var bgS=new T3.Scene(),bgC=new T3.OrthographicCamera(-1,1,1,-1,0,1);
+bgS.add(new T3.Mesh(new T3.PlaneGeometry(2,2),new T3.ShaderMaterial({uniforms:bgU,depthTest:false,depthWrite:false,
+vertexShader:'void main(){gl_Position=vec4(position.xy,0.,1.);}',
+fragmentShader:'uniform float uT,uL;uniform vec3 uA,uB;uniform vec2 uM,uR;'+
+'float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}'+
+'float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1.,0.)),f.x),mix(h(i+vec2(0.,1.)),h(i+vec2(1.,1.)),f.x),f.y);}'+
+'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<4;i++){v+=a*n(p);p=p*2.03+vec2(3.1,1.7);a*=.5;}return v;}'+
+'void main(){vec2 uv=gl_FragCoord.xy/uR;vec2 p=(uv-.5)*vec2(uR.x/uR.y,1.);float f=fbm(p*2.2+vec2(uT*.03,uT*.02));'+
+'vec3 c=mix(uB,uA,smoothstep(0.,1.,uv.y+.15*f));c+=uB*.35*f*smoothstep(.7,0.,uv.y);'+
+'vec2 dm=(uv-uM)*vec2(uR.x/uR.y,1.);c+=vec3(.9,.7,.35)*.12*exp(-dot(dm,dm)*8.);c*=1.-.35*dot(p,p);'+
+'vec3 Lc=mix(vec3(.97,.95,.92),uB*1.4+.3,.35)+.03*f;gl_FragColor=vec4(mix(c,Lc,uL),1.);}'})));
+
+var S=new T3.Scene(),cam=new T3.PerspectiveCamera(50,1,.1,150);
+S.add(new T3.HemisphereLight(0xfff1d6,0x2a2030,.9));
+var key=new T3.DirectionalLight(0xffe3b0,1.5);key.position.set(6,9,5);S.add(key);
+var fill=new T3.PointLight(0xffc2a0,.8,40);fill.position.set(-6,4,-4);S.add(fill);
+function std(c,o){o=o||{};return new T3.MeshStandardMaterial({color:c,roughness:o.r==null?.6:o.r,metalness:o.m||0,emissive:o.e||0,emissiveIntensity:o.ei||0,flatShading:!!o.f})}
+function edge(m,g){m.add(new T3.LineSegments(new T3.EdgesGeometry(g),new T3.LineBasicMaterial({color:GOLD,transparent:true,opacity:.5})))}
+function bx(p,w,h,d,x,y,z,c,e,o){var g=new T3.BoxGeometry(w,h,d),m=new T3.Mesh(g,std(c,o));m.position.set(x,y,z);if(e)edge(m,g);p.add(m);return m}
+function cy(p,r1,r2,h,x,y,z,c,o,s){var m=new T3.Mesh(new T3.CylinderGeometry(r1,r2,h,s||24),std(c,o));m.position.set(x,y,z);p.add(m);return m}
+function sp(p,r,x,y,z,c,o){var m=new T3.Mesh(new T3.SphereGeometry(r,20,14),std(c,o));m.position.set(x,y,z);p.add(m);return m}
+function tree(g,x,z){var t=new T3.Group();cy(t,.04,.06,.35,0,.18,0,0x5a4630,0,8);var c=new T3.Mesh(new T3.IcosahedronGeometry(.27,0),std(0x2f8f7b,{f:true,e:0x0d3a30,ei:.3}));c.position.y=.52;t.add(c);t.position.set(x,0,z);g.add(t)}
+var ups=[],spins=[],orbs=[];
+function mkD(i){var piv=new T3.Group(),g=new T3.Group(),th=i*STEP;piv.position.set(Math.cos(th)*RR,0,Math.sin(th)*RR);piv.rotation.y=Math.atan2(-Math.cos(th),-Math.sin(th));piv.add(g);S.add(piv);
+  cy(g,3.3,3.5,.3,0,-.15,0,0x3a322b,{r:.7},64);if(i!=3)cy(g,3.05,3.05,.05,0,.02,0,0x3f7a58,{r:.9},64);
+  var t=new T3.Mesh(new T3.TorusGeometry(3.4,.025,8,100),new T3.MeshBasicMaterial({color:GOLD,transparent:true,opacity:.8}));t.rotation.x=Math.PI/2;g.add(t);spins.push(g);return g}
+
+/* 0 - college building */
+(function(g){
+  bx(g,2.8,.2,1.8,0,.1,0,0xcfc7b4,1);bx(g,2.2,1,1.3,0,.7,-.1,BRICK,1);
+  for(var r=0;r<2;r++)for(var c=0;c<5;c++)bx(g,.18,.26,.04,-.8+c*.4,.55+r*.38,.56,0xffd98a,0,{e:0xffb347,ei:.9});
+  for(var i=0;i<6;i++)cy(g,.06,.06,1,-.9+i*.36,.7,.74,0xf6efe0,0,12);
+  var rf=new T3.Mesh(new T3.ConeGeometry(1.5,.5,4),std(0x3a3f4a,{m:.2}));rf.rotation.y=Math.PI/4;rf.scale.z=.62;rf.position.set(0,1.45,-.1);g.add(rf);
+  cy(g,.5,.55,.35,0,1.85,0,IVORY,0,32);
+  var dm=new T3.Mesh(new T3.SphereGeometry(.52,32,16,0,Math.PI*2,0,Math.PI/2),std(GOLD,{m:.8,r:.28,e:0x6b4a10,ei:.35}));dm.position.y=2.02;g.add(dm);
+  cy(g,.02,.02,1,0,2.9,0,0xf2e6c4,0,8);bx(g,.4,.22,.02,.2,3.2,0,GOLD,0,{e:0x8a5a10,ei:.4});
+  var bl=new T3.PointLight(0xffd98a,1.6,9);bl.position.set(0,2.8,1);g.add(bl);
+  [-1,1].forEach(function(s){bx(g,1.2,.7,.95,s*1.95,.45,-.05,0xB5584A,1);bx(g,1.3,.08,1.05,s*1.95,.84,-.05,0x3a3f4a,0,{m:.2});for(var c=0;c<3;c++)bx(g,.16,.24,.04,s*1.95-.35+c*.35,.5,.45,0xffd98a,0,{e:0xffb347,ei:.9})});
+  bx(g,.55,.03,1.7,0,.04,1.7,0xd8c48a);for(var k=0;k<8;k++){var a=k/8*6.283+.3;if(Math.sin(a)>.55&&Math.abs(Math.cos(a))<.35)continue;tree(g,Math.cos(a)*2.7,Math.sin(a)*2.7)}
+})(mkD(0));
+
+/* 1 - scattered information */
+(function(g){var sh=[];
+  for(var i=0;i<18;i++){var m=bx(g,.9,.03,.65,0,0,0,i%3?0xf1ead8:0xE3C77A);m.userData={r:Math.random()*6,a:Math.random()*6.283,rad:.6+Math.random()*2,y:.8+Math.random()*2.6};sh.push(m)}
+  bx(g,.7,.7,.7,0,.35,0,0x6b5a46,1);
+  ups.push(function(t){sh.forEach(function(m,i){var u=m.userData,a=u.a+t*.15*(i%2?1:-1);m.position.set(Math.cos(a)*u.rad,u.y+Math.sin(t*.8+u.r)*.2,Math.sin(a)*u.rad);m.rotation.set(Math.sin(t*.6+u.r)*.8,t*.4+u.r,Math.cos(t*.5+u.r)*.8)})});
+})(mkD(1));
+
+/* 2 - globe with the five modules orbiting */
+(function(g){
+  cy(g,.9,1.2,.3,0,.15,0,0x3a322b,0,32);var gl=new T3.Group();gl.position.y=2.1;g.add(gl);
+  gl.add(new T3.Mesh(new T3.SphereGeometry(1.25,40,28),std(0x1f6b66,{r:.4,m:.2,e:0x0b2d2a,ei:.5})));
+  gl.add(new T3.Mesh(new T3.SphereGeometry(1.27,24,16),new T3.MeshBasicMaterial({color:GOLD,wireframe:true,transparent:true,opacity:.45})));
+  for(var i=0;i<34;i++){var th=Math.random()*6.283,ph=Math.acos(2*Math.random()-1),m=new T3.Mesh(new T3.IcosahedronGeometry(.1+Math.random()*.12,0),std(i%3?0xd9c58c:0x7fb06a,{f:true}));m.position.set(Math.sin(ph)*Math.cos(th),Math.cos(ph),Math.sin(ph)*Math.sin(th)).multiplyScalar(1.27);m.lookAt(m.position.clone().multiplyScalar(2));gl.add(m)}
+  var ar=new T3.Mesh(new T3.TorusGeometry(1.5,.03,8,80),std(GOLD,{m:.8}));ar.rotation.set(Math.PI/2-.4,0,.3);gl.add(ar);
+  var og=new T3.Group();og.position.y=2.1;g.add(og);
+  var specs=[[0x7C93FF,new T3.SphereGeometry(.3,24,16),'modules'],[GOLD,new T3.CylinderGeometry(.36,.36,.08,36),'modules'],[0x5FB8A5,new T3.OctahedronGeometry(.38),'cgpa'],[0xD69BB5,new T3.TorusGeometry(.27,.08,16,40),'attendance'],[0xF1E9D8,new T3.BoxGeometry(.65,.18,.46),'more']];
+  specs.forEach(function(s,i){var m=new T3.Mesh(s[1],std(s[0],{m:.5,r:.25,e:s[0],ei:.2}));m.userData={go:s[2],a:i/5*6.283,b:Math.random()*6};og.add(m);orbs.push(m)});
+  ups.push(function(t){gl.rotation.y=t*.25;og.rotation.y=t*.2;orbs.forEach(function(m){var a=m.userData.a;m.position.set(Math.cos(a)*2.7,Math.sin(t+m.userData.b)*.3,Math.sin(a)*2.7);m.rotation.x=t*.5;m.rotation.y=t*.4})});
+})(mkD(2));
+
+/* 3 - classroom */
+(function(g){
+  bx(g,6,.12,4.6,0,.06,0,0xb58a5a);bx(g,6,2.8,.12,0,1.46,-2.3,0xe9e1d0,1);bx(g,.12,2.8,4.6,-3,1.46,0,0xe2d9c6);
+  var c=document.createElement('canvas');c.width=512;c.height=220;var x=c.getContext('2d');x.fillStyle='#1f3d2e';x.fillRect(0,0,512,220);x.fillStyle='#f4efe2';x.font='30px Georgia,serif';x.fillText('SGPA = \u03A3(credits \u00D7 points)',24,84);x.fillText('          \u00F7 \u03A3 credits',24,128);x.font='italic 22px Georgia,serif';x.fillText('CGPA is credit-weighted',24,184);
+  var bd=new T3.Mesh(new T3.BoxGeometry(3.4,1.4,.06),[std(0x7a5a2a),std(0x7a5a2a),std(0x7a5a2a),std(0x7a5a2a),new T3.MeshBasicMaterial({map:new T3.CanvasTexture(c)}),std(0x7a5a2a)]);bd.position.set(0,1.75,-2.2);g.add(bd);
+  for(var r=0;r<2;r++)for(var k=0;k<3;k++){var X=-1.6+k*1.6,Z=-.4+r*1.3;bx(g,.9,.06,.55,X,.7,Z,0x8a5e34,1);[[-.4,-.22],[.4,-.22],[-.4,.22],[.4,.22]].forEach(function(l){cy(g,.025,.025,.62,X+l[0],.37,Z+l[1],0x3a3a42,0,6)});bx(g,.5,.4,.05,X,.5,Z+.5,0x2a5a7a);bx(g,.5,.05,.4,X,.3,Z+.35,0x2a5a7a)}
+  bx(g,1.6,.08,.7,0,.9,-1.6,0x5a3a24,1);bx(g,1.6,.7,.7,0,.5,-1.6,0x6a4528);sp(g,.16,.5,1.05,-1.6,0xD69BB5,{e:0x6a2040,ei:.3});
+  var lamp=new T3.PointLight(0xfff0c8,1.2,9);lamp.position.set(0,2.6,0);g.add(lamp);
+})(mkD(3));
+
+/* 4 - clock tower */
+(function(g){
+  bx(g,1.8,.4,1.8,0,.2,0,0xcfc7b4,1);bx(g,1.2,3.4,1.2,0,2.1,0,BRICK,1);bx(g,1.3,.12,1.3,0,3.84,0,0xcfc7b4);
+  var rf=new T3.Mesh(new T3.ConeGeometry(.95,.9,4),std(0x3a3f4a,{m:.2}));rf.rotation.y=Math.PI/4;rf.position.y=4.35;g.add(rf);cy(g,.02,.02,.5,0,5,0,GOLD,{m:.8},8);sp(g,.07,0,5.28,0,GOLD,{m:.8});
+  var f=cy(g,.5,.5,.08,0,3.1,.62,0xf6efe0,0,48);f.rotation.x=Math.PI/2;
+  for(var i=0;i<12;i++){var a=i/12*6.283;bx(g,.03,i%3?.06:.1,.02,Math.sin(a)*.4,3.1+Math.cos(a)*.4,.67,0x2a2230).rotation.z=-a}
+  var mh=new T3.Group(),hh=new T3.Group();mh.position.set(0,3.1,.7);hh.position.set(0,3.1,.7);g.add(mh,hh);bx(mh,.025,.38,.015,0,.19,0,0x1a1420);bx(hh,.035,.26,.015,0,.13,0,0x1a1420);
+  bx(g,1.2,.45,.4,-1.9,.3,1.2,0x8a5e34,1);bx(g,1.2,.45,.4,1.9,.3,1.2,0x8a5e34,1);tree(g,-2.4,-.8);tree(g,2.4,-.6);tree(g,2.2,1.9);
+  ups.push(function(t){mh.rotation.z=-t*.5;hh.rotation.z=-t*.04});
+})(mkD(4));
+
+/* 5 - library */
+(function(g){
+  var cols=[0xD69BB5,GOLD,0x5FB8A5,0xF1E9D8,0xA24B3A,0x6C86C0,0x8a5e34];
+  [-1.9,0,1.9].forEach(function(X,u){var z=-1.3+Math.abs(X)*.25;bx(g,1.5,2.5,.35,X,1.3,z,0x5a3a24,1);for(var r=0;r<4;r++){var x0=X-.62;for(var b=0;b<9;b++){var w=.07+Math.random()*.06;bx(g,w,.3+Math.random()*.08,.22,x0,.45+r*.6,z+.04,cols[(b+r+u*2)%7]);x0+=w+.04}}});
+  var ob=new T3.Group(),b1=bx(ob,.6,.05,.45,-.3,0,0,0xf1e9d8),b2=bx(ob,.6,.05,.45,.3,0,0,0xf1e9d8);b1.rotation.z=.25;b2.rotation.z=-.25;ob.position.set(-1.3,1.6,1.1);g.add(ob);
+  var ai=new T3.Group();ai.position.set(1.3,1.5,1.1);g.add(ai);sp(ai,.34,0,0,0,0x5FB8A5,{e:0x5FB8A5,ei:.7,r:.2});var rg=new T3.Mesh(new T3.TorusGeometry(.55,.02,8,60),new T3.MeshBasicMaterial({color:GOLD}));ai.add(rg);
+  bx(g,2.4,.1,.9,0,.55,1.3,0x8a5e34,1);[-1,1].forEach(function(s){cy(g,.04,.04,.5,s*1.1,.28,1.3,0x3a3a42,0,6)});
+  ups.push(function(t){ob.position.y=1.6+Math.sin(t)*.12;ob.rotation.y=t*.4;ai.position.y=1.5+Math.sin(t*1.2)*.12;rg.rotation.x=t;rg.rotation.y=t*.6});
+})(mkD(5));
+
+/* 6 - roadmap steps */
+(function(g){
+  var cs=[BRICK,IVORY,0x5FB8A5,GOLD],fl=[];
+  cs.forEach(function(c,i){var X=-2.4+i*1.6;bx(g,1.45,.4*(i+1),1.1,X,.2*(i+1),0,c,1);cy(g,.02,.02,.7,X,.4*(i+1)+.35,-.4,0xf2e6c4,0,6);var f=bx(g,.4,.22,.02,X+.2,.4*(i+1)+.6,-.4,i==3?0x5FB8A5:0xD69BB5,0,{e:i==3?0x5FB8A5:0,ei:.5});fl.push(f)});
+  var o=sp(g,.4,2.4,2.9,0,0x5FB8A5,{e:0x5FB8A5,ei:.8,r:.2}),rg=new T3.Mesh(new T3.TorusGeometry(.65,.02,8,60),new T3.MeshBasicMaterial({color:GOLD}));rg.position.copy(o.position);g.add(rg);
+  ups.push(function(t){o.position.y=2.9+Math.sin(t*1.3)*.15;rg.position.y=o.position.y;rg.rotation.x=t;fl.forEach(function(f,i){f.rotation.y=Math.sin(t*2+i)*.3})});
+})(mkD(6));
+
+/* 7 - graduation */
+(function(g){
+  cy(g,.7,.9,.3,0,.15,0,0x3a322b,0,32);cy(g,.12,.12,.5,0,.55,0,GOLD,{m:.8},16);cy(g,.45,.2,.6,0,1.1,0,GOLD,{m:.8,r:.25,e:0x6b4a10,ei:.3},32);
+  var caps=[];for(var i=0;i<8;i++){var c=new T3.Group();bx(c,.7,.05,.7,0,.12,0,0x1c1a22);cy(c,.2,.22,.2,0,0,0,0x1c1a22,0,16);sp(c,.05,.38,.07,.38,GOLD,{m:.6});c.userData={a:i/8*6.283,h:1.8+(i%3)*.5,b:Math.random()*6};g.add(c);caps.push(c)}
+  ups.push(function(t){caps.forEach(function(c){var a=c.userData.a+t*.25;c.position.set(Math.cos(a)*1.9,c.userData.h+Math.sin(t*1.2+c.userData.b)*.35,Math.sin(a)*1.9);c.rotation.set(Math.sin(t+c.userData.b)*.35,t*.8+c.userData.b,Math.cos(t*.9+c.userData.b)*.35)})});
+})(mkD(7));
+
+var ring=new T3.Mesh(new T3.TorusGeometry(RR,.03,8,200),new T3.MeshBasicMaterial({color:GOLD,transparent:true,opacity:.35}));ring.rotation.x=Math.PI/2;ring.position.y=.01;S.add(ring);
+var dn=260,dp=new Float32Array(dn*3);for(var q=0;q<dn;q++){var ra=4+Math.random()*22,aa=Math.random()*6.283;dp[q*3]=Math.cos(aa)*ra;dp[q*3+1]=Math.random()*9;dp[q*3+2]=Math.sin(aa)*ra}
+var dg=new T3.BufferGeometry();dg.setAttribute('position',new T3.BufferAttribute(dp,3));var dust=new T3.Points(dg,new T3.PointsMaterial({color:0xf3d9a0,size:.07,transparent:true,opacity:.7}));S.add(dust);
+
+function size(){var W=innerWidth,H=innerHeight;R.setSize(W,H,false);cam.aspect=W/H;if(cam.aspect>1.15)cam.setViewOffset(W,H,-W*.2,0,W,H);else cam.clearViewOffset();cam.updateProjectionMatrix();bgU.uR.value.set(W*R.getPixelRatio(),H*R.getPixelRatio())}
+addEventListener('resize',size);size();
+
+var prog=0,sm=0,tx=0,ty=0,mx=0,my=0,drag=0,hover=null,clock=new T3.Clock(),ray=new T3.Raycaster(),lt=isLight()?1:0,tgt=new T3.Vector3();
+function onScroll(){var m=document.documentElement.scrollHeight-innerHeight;prog=m>0?scrollY/m:0}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+addEventListener('pointermove',function(e){tx=e.clientX/innerWidth-.5;ty=e.clientY/innerHeight-.5;var free=!e.target.closest('.card,.btn,nav,input,select');
+  if(e.buttons&&free)drag+=e.movementX*.012;
+  ray.setFromCamera({x:tx*2,y:-ty*2},cam);var h=ray.intersectObjects(orbs)[0];hover=h?h.object:null;
+  document.body.style.cursor=hover&&free?'pointer':''});
+addEventListener('click',function(e){if(hover&&!e.target.closest('.card,.btn,nav,input,select,button,a'))go(hover.userData.go)});
+
+function frame(){var dt=Math.min(clock.getDelta(),.05),t=clock.elapsedTime;
+  sm+=(prog-sm)*(reduce?1:Math.min(1,dt*3));mx+=(tx-mx)*.07;my+=(ty-my)*.07;
+  var f=sm*(N-1),i0=Math.min(N-1,Math.floor(f)),i1=Math.min(N-1,i0+1),k=f-i0,fi=Math.round(f);
+  bgU.uA.value.copy(PAL[i0][0]).lerp(PAL[i1][0],k);bgU.uB.value.copy(PAL[i0][1]).lerp(PAL[i1][1],k);
+  lt+=((isLight()?1:0)-lt)*.1;bgU.uT.value=t;bgU.uL.value=lt;bgU.uM.value.set(.5+mx,.5-my);
+  var yaw=f*STEP+mx*.22,dx=Math.cos(yaw),dz=Math.sin(yaw);
+  cam.position.set(-dx*1.8,3.4-my*.8,-dz*1.8);tgt.set(dx*RR,1.4+my*-.5,dz*RR);cam.lookAt(tgt);
+  spins.forEach(function(s,i){s.rotation.y=(i==fi?mx*.9+drag:0)+(reduce?0:Math.sin(t*.3+i)*.1)});
+  ups.forEach(function(u){if(!reduce)u(t)});
+  dust.rotation.y=reduce?0:t*.02;
+  orbs.forEach(function(o){var kk=o===hover?1.5:1;o.scale.x+=(kk-o.scale.x)*.12;o.scale.y=o.scale.z=o.scale.x});
+  R.clear();R.render(bgS,bgC);R.clearDepth();R.render(S,cam);requestAnimationFrame(frame)}
+frame();
+})();
+</script>
+</body>
+</html>
